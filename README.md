@@ -63,13 +63,7 @@ install spatial;
 load spatial;
 ```
 
-On va essayer de calculer la population à moins d'un kilomètre de la Tour Eiffel. On commence par créer le point de la Tour Eiffel puis le disque d'un kilomètre :
-
-```
-install spatial;
-load spatial;
-```
-
+On va essayer de calculer la population à moins d'un kilomètre de la Tour Eiffel. On commence par créer le point de la Tour Eiffel puis le disque d'un kilomètre. 
 Attention le système de projection des carreaux est le 3035 LAEA europe. La commande pour le point :
 ```
 select ST_Point (3756295, 2889313);
