@@ -97,7 +97,28 @@ from carreaux
 where ST_Intersects(carreaux.geometry, st_buffer(ST_Point (3756295, 2889313),1000))
 ```
 
+Un peu plus compliqué, on fait une interpolation spatiale par la surface :
 
+```
+select sum(ind*weight) as ind, sum(men*weight) as men,
+       sum(men_pauv*weight) as men_pauv, sum(men_1ind*weight) as men1_ind,
+       sum(men_5ind*weight) as men_5ind , sum(men_prop*weight) as men_prop,
+       sum(men_fmp*weight) as men_fmp, sum(ind_snv*weight) as ind_snv, 
+       sum(men_surf*weight) as men_surf, sum(men_coll*weight) as men_coll,
+       sum(men_mais*weight) as men_mais, sum(log_av45*weight) as log_av45,
+       sum(log_70_90*weight) as log_70_90, sum(log_ap90*weight) as log_ap90,
+       sum(log_inc*weight) as log_inc, sum(log_soc*weight) as log_soc,
+       sum(ind_0_3*weight) as ind_0_3, sum(ind_4_5*weight) as ind_4_5,
+       sum(ind_6_10*weight) as ind_6_10, sum(ind_11_17*weight) as ind_11_17,
+       sum(ind_18_24*weight) as ind_18_24, sum(ind_25_39*weight) as ind_25_39,
+       sum(ind_40_54*weight) as ind_40_54, sum(ind_55_64*weight) as ind_55_64,
+       sum(ind_65_79*weight) as ind_65_79, sum(ind_80p*weight) as ind_80p ,
+       sum(ind_inc*weight) as ind_inc
+from 
+(SELECT *, st_area(st_intersection(carreaux.geometry, st_buffer(st_point(3756295, 2889313),1000))) / st_area(carreaux.geometry) as weight 
+from carreaux
+where ST_Intersects(carreaux.geometry, st_buffer(st_point(3756295, 2889313),1000))) ;
+```
 
 
 
