@@ -11,3 +11,28 @@ L'adresse du fichier à requêter n'est pads commode, on va commencer par créer
 ```
 CREATE OR REPLACE VIEW filosofi AS from  read_parquet('https://www.data.gouv.fr/fr/datasets/r/b480cead-3f46-4b1b-a943-62a009b83f7a');
 ```
+Pour connaitre le contenu de la table :
+```
+SUMMARIZE filosofi;
+```
+
+Pour obtenir le nombre de ligne dans notre table : 
+
+```
+select count(*) 
+from filosofi;
+```
+
+Pour obtenir la population dans la commune d'Auzeville (code insee 31035) :
+
+```
+select lcog_geo,  sum(ind) 
+from filosofi
+where lcog_geo = '31035'
+group by lcog_geo;
+```
+
+
+
+
+
