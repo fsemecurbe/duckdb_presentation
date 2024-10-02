@@ -90,9 +90,18 @@ select sum(ind) as ind
 from filosofi
 where ST_Intersects(filosofi.geometry, st_buffer(ST_Point (3756295, 2889313),1000));
 ```
+Cela prend 5 secondes, on est d'accord, ce n'est pas énorme, mais peut on faire mieux en créant une table et en utilisant une indexation spatiale :
+```
+create or replace table carreaux from filosofi
+create index sindex on carreaux USING RTREE(geometry);
+```
 
-
-
+Bon, c'est diabolique :
+```
+select sum(ind) as ind
+from carreaux
+where ST_Intersects(carreaux.geometry, st_buffer(ST_Point (3756295, 2889313),1000))
+```
 
 
 
