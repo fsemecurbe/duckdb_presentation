@@ -16,7 +16,7 @@ Pour connaitre le contenu de la table :
 SUMMARIZE filosofi;
 ```
 
-Pour obtenir le nombre de ligne dans notre table : 
+Pour obtenir le nombre de lignes dans notre table : 
 
 ```
 select count(*) 
@@ -26,11 +26,48 @@ from filosofi;
 Pour obtenir la population dans la commune d'Auzeville (code insee 31035) :
 
 ```
-select lcog_geo,  sum(ind) 
+select lcog_geo,  sum(ind) as ind 
 from filosofi
 where lcog_geo = '31035'
 group by lcog_geo;
 ```
+
+Il manque de la population car lcog_geo n'est pas le code commune mais la concaténation des codes communes des communes intersectants le carreau. Pour obtenir un majorant :
+```
+select substr(lcog_geo,1,5),  sum(ind) as ind 
+from filosofi
+where substr(lcog_geo,1,5) = '31035'
+group by substr(lcog_geo,1,5);
+```
+
+A présent, nous allons calculer la population communale de toutes les communes :
+```
+select substr(lcog_geo,1,5),  sum(ind) as ind 
+from filosofi
+group by substr(lcog_geo,1,5);
+```
+Que constatez vous ? Comment l'expliquez vous ? 
+
+Maintenant à vous de calculer la population par département :
+
+```
+select substr(lcog_geo,1,2) as dep,  sum(ind) as ind 
+from filosofi
+group by substr(lcog_geo,1,2);
+```
+
+Maintenant, on va faire un peu de géographie :
+
+
+
+
+
+
+
+
+
+
+
 
 
 
