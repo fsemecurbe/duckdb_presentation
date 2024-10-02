@@ -56,7 +56,13 @@ from filosofi
 group by substr(lcog_geo,1,2);
 ```
 
-Maintenant, on va faire un peu de géographie :
+Maintenant, on va faire un peu de géographie, on commence par charger le module spatial :
+
+```
+install spatial;
+load spatial;
+```
+
 
 
 
