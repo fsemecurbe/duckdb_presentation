@@ -86,7 +86,7 @@ where ST_Intersects(filosofi.geometry, st_buffer(ST_Point (3756295, 2889313),100
 ```
 Cela prend 5 secondes, on est d'accord, ce n'est pas énorme, mais peut on faire mieux en créant une table et en utilisant une indexation spatiale :
 ```
-create or replace table carreaux from filosofi
+create or replace table carreaux as select *  from filosofi;
 create index sindex on carreaux USING RTREE(geometry);
 ```
 
