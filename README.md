@@ -63,6 +63,33 @@ install spatial;
 load spatial;
 ```
 
+On va essayer de calculer la population à moins d'un kilomètre de la Tour Eiffel. On commence par créer le point de la Tour Eiffel puis le disque d'un kilomètre :
+
+```
+install spatial;
+load spatial;
+```
+
+Attention le système de projection des carreaux est le 3035 LAEA europe. La commande pour le point :
+```
+select ST_Point (3756295, 2889313);
+```
+La commande pour le disque :
+```
+select st_buffer(ST_Point (3756295, 2889313),1000);
+```
+Maintenant, on va faire l'intersection spatiale :
+```
+select *
+from filosofi
+where ST_Intersects(filosofi.geometry, st_buffer(ST_Point (3756295, 2889313),1000))
+```
+On préocéde à l'agrégation des valeurs des carreaux :
+```
+select sum(ind) as ind
+from filosofi
+where ST_Intersects(filosofi.geometry, st_buffer(ST_Point (3756295, 2889313),1000));
+```
 
 
 
