@@ -100,7 +100,7 @@ where ST_Intersects(carreaux.geometry, st_buffer(ST_Point (3756295, 2889313),100
 Un peu plus compliqué, on fait une interpolation spatiale par la surface :
 
 ```
-select sum(ind*weight) as ind, sum(men*weight) as men,
+select 'hubblo' as  unit, sum(ind*weight) as ind, sum(men*weight) as men,
        sum(men_pauv*weight) as men_pauv, sum(men_1ind*weight) as men1_ind,
        sum(men_5ind*weight) as men_5ind , sum(men_prop*weight) as men_prop,
        sum(men_fmp*weight) as men_fmp, sum(ind_snv*weight) as ind_snv, 
