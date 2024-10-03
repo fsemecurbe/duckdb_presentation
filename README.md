@@ -108,9 +108,9 @@ Un peu plus compliqué, on fait une interpolation spatiale par la surface :
 ```
 select 'hubblo' as  unit, sum(ind*weight) as ind, 
 from 
-(SELECT *, st_area(st_intersection(carreaux.geometry, getvariable('hubblo'))) / st_area(carreaux.geometry) as weight 
+(SELECT *, st_area(st_intersection(geometry, getvariable('hubblo'))) / st_area(geometry) as weight 
 from carreaux
-where ST_Intersects(carreaux.geometry, getvariable('hubblo'))) ;
+where ST_Intersects(geometry, getvariable('hubblo'))) ;
 ```
 Avec l'ensemble des colonnes :
 
@@ -130,9 +130,9 @@ select 'hubblo' as  unit, sum(ind*weight) as ind, sum(men*weight) as men,
        sum(ind_65_79*weight) as ind_65_79, sum(ind_80p*weight) as ind_80p ,
        sum(ind_inc*weight) as ind_inc
 from 
-(SELECT *, st_area(st_intersection(carreaux.geometry, getvariable('hubblo'))) / st_area(carreaux.geometry) as weight 
+(SELECT *, st_area(st_intersection(geometry, getvariable('hubblo'))) / st_area(geometry) as weight 
 from carreaux
-where ST_Intersects(carreaux.geometry, getvariable('hubblo'))) ;
+where ST_Intersects(geometry, getvariable('hubblo'))) ;
 ```
 
 
