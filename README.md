@@ -104,7 +104,7 @@ Un peu plus compliqué, on fait une interpolation spatiale par la surface :
 ```
 select 'hubblo' as  unit, sum(ind*weight) as ind, 
 from 
-(SELECT *, st_area(st_intersection(carreaux.geometry, getvariable('hubblo')) / st_area(carreaux.geometry) as weight 
+(SELECT *, st_area(st_intersection(carreaux.geometry, getvariable('hubblo'))) / st_area(carreaux.geometry) as weight 
 from carreaux
 where ST_Intersects(carreaux.geometry, getvariable('hubblo')) ;
 ```
