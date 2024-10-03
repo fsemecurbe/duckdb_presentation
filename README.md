@@ -72,11 +72,13 @@ La commande pour le disque :
 ```
 select st_buffer(ST_Point (3756295, 2889313),1000);
 ```
-Maintenant, on va faire l'intersection spatiale :
+Maintenant, on va faire l'intersection spatiale en créant une variable **hubblo**:
 ```
+set variable hubblo = st_buffer(ST_Point (3756295, 2889313),1000);
+
 select *
 from filosofi
-where ST_Intersects(filosofi.geometry, st_buffer(ST_Point (3756295, 2889313),1000))
+where ST_Intersects(filosofi.geometry, getvariable('hubblo'));
 ```
 On préocéde à l'agrégation des valeurs des carreaux :
 ```
