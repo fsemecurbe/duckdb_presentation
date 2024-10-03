@@ -77,10 +77,13 @@ Maintenant, on va faire l'intersection spatiale en créant une variable **hubblo
 set variable hubblo = st_buffer(ST_Point (3756295, 2889313),1000);
 
 select getvariable('hubblo');
-
+```
+Que l'on peut intégrer dans une requête :
+```
 select * from filosofi
 where ST_Intersects(filosofi.geometry, getvariable('hubblo'));
 ```
+
 On préocéde à l'agrégation des valeurs des carreaux :
 ```
 select sum(ind) as ind
