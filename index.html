@@ -87,22 +87,22 @@ ul.task-list li input[type="checkbox"] {
 <p>Le langage SQL repose sur des mots-clés et une structure qui ont influencé de nombreux langages actuels, le rendant familier même pour les novices.</p>
 </section>
 </div>
-<div class="trigger new-trigger" data-hlz="cr-from" data-focus-on="cr-sql">
+<div class="trigger new-trigger" data-focus-on="cr-sql">
 <div class="narrative">
 <p>La clause FROM est essentielle, car elle définit la table ou le fichier à interroger. Dans notre exemple, nous consultons la <a href="https://www.geoportail.gouv.fr/donnees/densite-de-population">base carroyée à 200 m</a> de la population de l’Insee. En dplyr, cela correspond à la première ligne sur laquelle on va travailler</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-hlz="cr-where" data-focus-on="cr-sql">
+<div class="trigger new-trigger" data-focus-on="cr-sql">
 <div class="narrative">
 <p>La clause <strong>where</strong> permet de filtrer les données et correspond à la commande <strong>filter</strong> de dplyr. Elle est optionnelle. Dans cet exemple, nous sélectionnons les carreaux appartenant à cinq départements.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-hlz="cr-group" data-focus-on="cr-sql">
+<div class="trigger new-trigger" data-focus-on="cr-sql">
 <div class="narrative">
 <p>La clause <strong>group by</strong> correspond directement à la commande group_by et sert à agréger les informations. Elle est également optionnelle. Dans notre exemple, nous regroupons les données par département.</p>
 </div>
 </div>
-<div class="trigger new-trigger" data-hlz="cr-select" data-focus-on="cr-sql">
+<div class="trigger new-trigger" data-focus-on="cr-sql">
 <div class="narrative">
 <p>La clause SELECT combine les fonctions de select et mutate de dplyr. Elle permet d’effectuer des calculs et de conserver uniquement certaines variables. Dans notre exemple, nous conservons le département et additionnons la variable ind pour obtenir les populations. La fonction count(*) calcule le nombre de carreaux.</p>
 </div>
@@ -132,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="duckdb-en-action" class="level2">
 <h2 class="anchored" data-anchor-id="duckdb-en-action">Duckdb en action</h2>
 <p>Maintenant, nous allons ouvrir ensemble <a href="https://duckdb.org/">duckdb</a> dans votre navigateur. Pour effectuer vos premières requêtes, il vous suffit de lancer une <strong>live demo</strong>. C’est austère, mais terriblement efficace ; vous allez le constater très rapidement !</p>
-<p>Nous allons utiliser les données filosfi accessible ici : <a href="https://www.data.gouv.fr/fr/datasets/r/b480cead-3f46-4b1b-a943-62a009b83f7a">https://www.data.gouv.fr/fr/datasets/r/b480cead-3f46-4b1b-a943-62a009b83f7a</a></p>
+<p>Nous allons utiliser les données filosfi accessible ici : <a href="https://www.data.gouv.fr/fr/datasets/r/b480cead-3f46-4b1b-a943-62a009b83f7a" class="uri">https://www.data.gouv.fr/fr/datasets/r/b480cead-3f46-4b1b-a943-62a009b83f7a</a></p>
 <p>Les principales variables du fichier sont les suivantes :</p>
 <ul>
 <li>ind : le nombre de personnes dans les carreaux ;</li>
@@ -170,6 +170,8 @@ group by substr(lcog_geo,1,2);</code></pre>
 <li>le format <a href="https://en.wikipedia.org/wiki/Apache_Parquet">parquet</a></li>
 <li>la puissance de <a href="https://en.wikipedia.org/wiki/DuckDB">duckdb</a></li>
 </ul>
+<section id="un-peu-de-géographie" class="level3">
+<h3 class="anchored" data-anchor-id="un-peu-de-géographie">Un peu de géographie</h3>
 <p>Maintenant, on va faire un peu de géographie à l’aide de l’extension spatial :</p>
 <pre><code>install spatial;
 load spatial;</code></pre>
@@ -197,12 +199,13 @@ Solution
 from filosofi
 where ST_Intersects(filosofi.geometry, getvariable('hubblo'));</code></pre>
 </details>
-<p>Nous allons maintenant passer sous Cerise, où vous pouvez continuer le spatial avec Benoît.</p>
+<p>Nous allons maintenant passer sous Cerise, ou vous pouvez continuer le spatial avec Benoît.</p>
 </section>
-<section id="pour-les-benoîts-carroyer-loccupation-du-sol" class="level2">
-<h2 class="anchored" data-anchor-id="pour-les-benoîts-carroyer-loccupation-du-sol">Pour le(s) Benoît(s) : Carroyer l’occupation du sol</h2>
-<p>Notre objectif est compléter les données carroyées de l’Insee, en calculant pour chaque carreau son occupation du sol. Nous allons faire l’analyse sur les <a href="Pyrénées-Orientales">https://www.data.gouv.fr/fr/datasets/occupation-du-sol-a-grande-echelle-ign-et-cerema/</a> avec la base :</p>
-<p><a href="https://www.data.gouv.fr/fr/datasets/r/e56d8a6b-465d-480f-9973-e7d699b01770">https://www.data.gouv.fr/fr/datasets/r/e56d8a6b-465d-480f-9973-e7d699b01770</a> dont la projection est le 3035</p>
+</section>
+<section id="pour-les-benoîte.s-carroyer-loccupation-du-sol" class="level2">
+<h2 class="anchored" data-anchor-id="pour-les-benoîte.s-carroyer-loccupation-du-sol">Pour le(s) Benoît(e.s) : Carroyer l’occupation du sol</h2>
+<p>Notre objectif est de compléter les données carroyées de l’Insee, en calculant pour chaque carreau son occupation du sol. Nous allons faire l’analyse sur les <a href="Pyrénées-Orientales">https://www.data.gouv.fr/fr/datasets/occupation-du-sol-a-grande-echelle-ign-et-cerema/</a> avec la base :</p>
+<p><a href="https://www.data.gouv.fr/fr/datasets/r/e56d8a6b-465d-480f-9973-e7d699b01770" class="uri">https://www.data.gouv.fr/fr/datasets/r/e56d8a6b-465d-480f-9973-e7d699b01770</a> dont la projection est le 3035</p>
 <p>Il est temps de faire une vue (<em>ocs_ge</em>) de cette base :</p>
 <details>
 <summary>
@@ -213,59 +216,97 @@ Solution
 <p>J’ai testé avant vous, le traitement est un peu lent, on va donc charger la table dans duckdb, soit dans la mémoire du navigateur puis faire une indexation spatiale:</p>
 <pre><code>create or replace table occ_sol as select *  from ocs_ge;
 create index sindex on occ_sol USING RTREE(geometry);</code></pre>
-<p>Le fichier OCS GE contient 3 variables d’intéret pour nous :</p>
-<ul>
-<li>CODE_CS : Couverture du sol ;</li>
-<li>CODE_US : Usage du sol ;</li>
-<li>geometry : les coordonnées géographiques des objets.</li>
-</ul>
-<p>On commence par calculer les surfaces totales pour chaque croisement CODE_CS * CODE_US.</p>
+<p>Pour les mêmes raisons, à vous de charger en mémoire la vue <strong>filosofi</strong> et de la nommer <strong>carreaux</strong> et de déclarer un index spatial:</p>
 <details>
 <summary>
 Solution
 </summary>
-<pre><code>select CODE_CS, CODE_US, sum(st_area(geometry)) as surface
-from occ_sol
-group by CODE_CS, CODE_US;
-</code></pre>
+<pre><code>create or replace table carreaux as select *  from filosofi;
+create index sindex2 on carreaux USING RTREE(geometry);</code></pre>
 </details>
-<p>Et maintenant, on commence le carroyage en cherchant l’emprise spatiale de notre couche <strong>occ_sol</strong> :</p>
-<pre><code>select st_Xmin(geometry) as xmin, st_Xmax(geometry) as xmax, st_Ymin(geometry) as ymin, st_Ymax(geometry) as ymax
+<section id="une-première-requête-spatiale" class="level3">
+<h3 class="anchored" data-anchor-id="une-première-requête-spatiale">Une première requête spatiale</h3>
+<p>Le fichier OCS GE contient 2 variables d’intéret pour nous :</p>
+<ul>
+<li><strong>CODE_CS</strong> : Couverture du sol ;</li>
+<li><strong>geometry</strong> : les coordonnées géographiques des objets.</li>
+</ul>
+<p>On va intersecter les carreaux de <strong>filosofi</strong> avec la table <strong>occ_sol</strong>. Pour ce faire, on détermine la table <strong>carreaux_66</strong> contenant les carreaux des Pyrénées-Orientales toujours à l’aide de la variable <strong>lcog_geo</strong></p>
+<details>
+<summary>
+Solution
+</summary>
+<pre><code>create or replace table carreaux_66 as
+select * 
+from carreaux 
+where substr(lcog_geo,1,2)='66';</code></pre>
+</details>
+<p>Le calcul de l’occupation du sol par carreau repose sur l’utilisation de <strong>st_intersects</strong> et de <strong>st_intersection</strong> :</p>
+<pre><code>create or replace table occupation_carroye_66_1 as 
+select idcar_200m, CODE_CS, sum(st_area(st_intersection(occ_sol.geometry, carreaux_66.geometry))) as surface
+from occ_sol, carreaux_66 
+where ST_Intersects(occ_sol.geometry, carreaux_66.geometry)
+group by idcar_200m , CODE_CS;
+
+select * from occupation_carroye_66_1 limit 10;</code></pre>
+</section>
+<section id="et-si-on-construisait-nos-carreaux" class="level3">
+<h3 class="anchored" data-anchor-id="et-si-on-construisait-nos-carreaux">Et si on construisait nos carreaux !</h3>
+<p>La couche carreaux ne couvre pas tout le département. Si on veut aller plus loin, il est nécessaire de faire une tesselation du territoire :</p>
+<p>La première étape consiste à récupérer l’emprise spatiale de <strong>occ_sol</strong> :</p>
+<pre><code>create or replace table etendue as  
+select st_Xmin(geometry) as xmin, st_Xmax(geometry) as xmax, st_Ymin(geometry) as ymin, st_Ymax(geometry) as ymax
 from (select ST_Extent_Agg(geometry) as geometry from occ_sol);</code></pre>
-<p>On va créer maintenant les carreaux à 10 km qui recouvrent l’emprise spatiale, on va commencer par créer les x,y des coins en bas à gauche des carreaux à partir de l’étendue spatiale obtenue précédemment. Une variable <strong>size</strong> est bien utile pour paramètrer la taille des carreaux :</p>
-<pre><code>set variable size = 10000;</code></pre>
-<p>puis on fait un petit produit cartésien :</p>
-<pre><code>select * from
-(select * as x from generate_series(3640000, 3770000, getvariable('size'))) as X,
-(select * as y from generate_series(2160000, 2250000, getvariable('size'))) as Y;</code></pre>
-<p>On va maintenant créer notre table de carreaux :</p>
-<pre><code>create or replace table carreaux as (
-select x, y , ST_GeomFromText('POLYGON(('||x||' '||y||',
+<p>Puis de découper l’espace en longitude et latitude pour déterminer les x,y des coins en bas à gauche des carreaux à partir de l’étendue spatiale obtenue précédemment. Une variable <strong>size</strong> est bien utile pour paramètrer la taille des carreaux :</p>
+<pre><code>set variable size = 1000;
+
+
+create or replace table carreaux_size as 
+select x,y, ST_GeomFromText('POLYGON(('||x||' '||y||',
                                         '||x + getvariable('size')||' '||y||',  
                                         '||x + getvariable('size')||' '||y+getvariable('size')||',
                                         '||x||' '||y+getvariable('size')||',
                                         '||x||' '||y||'))') as geometry
 from
-(select * from
-(select * as x from generate_series(3640000, 3770000, getvariable('size'))) as X,
-(select * as y from generate_series(2160000, 2250000, getvariable('size'))) as Y));
-create index sindex2 on carreaux USING RTREE(geometry);</code></pre>
+(select unnest(generate_series(cast(floor(xmin/getvariable('size'))*getvariable('size') as int), cast(floor(xmax/getvariable('size'))*getvariable('size') as int), getvariable('size'))) as x
+from etendue),
+(select unnest(generate_series(cast(floor(ymin/getvariable('size'))*getvariable('size') as int), cast(floor(ymax/getvariable('size'))*getvariable('size') as int), getvariable('size'))) as y
+from etendue);</code></pre>
 <p>Il nous reste plus qu’à faire l’intersection spatiale :</p>
-<pre><code>create or replace table occupation_carroye as (
-select x,y,CODE_CS, CODE_US, sum(surface) as surface 
-from
-(select x, y, CODE_CS, CODE_US, st_area(st_intersection(occ_sol.geometry, carreaux.geometry)) as surface
-from occ_sol, carreaux 
-where ST_Intersects(occ_sol.geometry, carreaux.geometry))
-group by x,y,CODE_CS, CODE_US);</code></pre>
+<details>
+<summary>
+Solution
+</summary>
+<pre><code>create or replace table occupation_carroye as 
+select x, y, CODE_CS, sum(st_area(st_intersection(occ_sol.geometry, carreaux_size.geometry))) as surface
+from occ_sol, carreaux_size 
+where ST_Intersects(occ_sol.geometry, carreaux_size.geometry)
+group by x,y,CODE_CS;
+
+select * from occupation_carroye limit 10;</code></pre>
+</details>
+<p>Il suffit de faire un pivot et un merge pour obtenir une table chouette :</p>
+<details>
+<summary>
+Solution
+</summary>
+<pre><code>create or replace table t_occupation_carroye as 
+pivot occupation_carroye
+on CODE_CS using sum(surface);
+
+create or replace table carreaux_occupation_sol as
+select * 
+from  carreaux_size, t_occupation_carroye
+where carreaux_size.x = t_occupation_carroye.x and carreaux_size.y = t_occupation_carroye.y;</code></pre>
+</details>
 <p>et maintenant on peut récupérer la table chez nous en la transformant en csv :</p>
-<pre><code>COPY
-    (SELECT * FROM occupation_carroye)
-    TO 'occupation_carroye.csv'
-    (FORMAT 'csv');</code></pre>
+<pre><code>COPY carreaux_occupation_sol⟩ TO occupation_sol.geojsonn'
+WITH (FORMAT GDAL, DRIVER 'GeoJSON', SRS '3035');</code></pre>
 <p>puis en la téléchargant :</p>
-<pre><code>.files download occupation_carroye.csv </code></pre>
-<p>Qu’en pensez vous ?</p>
+<pre><code>.files download carreaux_occupation_sol.parquet </code></pre>
+<p>Et après avec un peu de SIG, on obtient par exemple la carte :</p>
+<p><img src="oc_sol.png" class="img-fluid"></p>
+</section>
 </section>
 </section>
 
