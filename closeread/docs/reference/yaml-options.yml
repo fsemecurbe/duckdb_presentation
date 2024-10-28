@@ -1,0 +1,26 @@
+- option: "debug-mode"
+  format: yaml
+  parent-key: "format:closeread-html"
+  possible-values:
+    - "false"
+    - "true"
+  description: Toggle debug mode.
+  
+- option: "remove-header-space"
+  format: yaml
+  parent-key: "format:closeread-html"
+  possible-values:
+    - "false"
+    - "true"
+  description: Removes the space for the header at the top of the document. Useful when you want the document to start immediately with a closeread section.
+  
+- option: "layout"
+  format: yaml
+  parent-key: "format:closeread-html:cr-section"
+  possible-values:
+    - "sidebar-left"
+    - "sidebar-right"
+    - "overlay-left"
+    - "overlay-center"
+    - "overlay-right"
+  description: Define the relative positioning of the narrative and sticky columns in all sections in the document. Is overridden if a section specifies its own layout.

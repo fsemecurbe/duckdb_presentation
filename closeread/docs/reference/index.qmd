@@ -1,0 +1,75 @@
+---
+title: Reference
+toc: true
+toc-expand: true
+css: ref-styles.css
+listing:
+  - id: yaml-options
+    template: reference.ejs
+    contents: yaml-options.yml
+  - id: section-options
+    template: reference.ejs
+    contents: section-options.yml
+  - id: trigger-options
+    template: reference.ejs
+    contents: trigger-options.yml
+  - id: sticky-options
+    template: reference.ejs
+    contents: sticky-options.yml
+---
+
+## Document Metadata
+
+Document-wide options under the `closeread-html` format key in YAML format.
+
+::: {#yaml-options}
+:::
+
+## Closeread Component Options
+
+Closeread takes advantage of the Pandocs's [fenced div and bracketed span syntax](https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans) to pass options to sections, triggers, and stickies. The fenced div syntax allows you to wrap block content (a figure, a paragraph, etc) in a div and pass it one or more identifiers, classes, and attributes.
+
+``` markdown
+:::{#myid .myclass myattribute="something"}
+< block content like a figure or paragraph >
+:::
+```
+
+The bracketed span allows you to wrap inline content (a word or phrase, a citation, etc) in a span and pass the same information.
+
+```markdown
+Hello world [@cr-hello]{#myid .myclass myattribute="something"}
+```
+
+Identifiers start with `#`; classes start with `.`, and attributes have a key / value pair separated by `=` and no spaces. You can assign to a div one or more of each of these (though they must be supplied in identifier-class-attributes order) as long as each is separated by a space.
+
+### Section Options
+
+A closeread section is a div with the class `cr-section` that contains stickies and triggers.
+
+::: {#section-options}
+:::
+
+### Sticky Options
+
+A sticky block is a fenced div tagged with an identifier prefixed with `cr-`.
+
+::: {#sticky-options}
+:::
+
+### Trigger Block Options
+
+A trigger block is a div with the `focus-on` attribute to trigger effects on a particular sticky element. Paragraphs allow the use of the citation syntax (`@cr-mysticky`) as a shortcut to wrap the paragraph in a div with the `focus-on` attribute.
+
+::: {#trigger-options}
+:::
+
+## Keyboard Hotkeys
+
+While viewing a closeread document in a browser, you can press certain hotkeys to toggle features.
+
+| Hotkey                    | Effect                     |
+|---------------------------|----------------------------|
+| {{< kbd P >}}             | Toggle presentation mode   |
+| {{< kbd forward-arrow >}} | Scroll to next trigger     |
+| {{< kbd back-arrow >}}    | Scroll to previous trigger |

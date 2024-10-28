@@ -1,0 +1,53 @@
+project:
+  type: website
+  pre-render:
+    - './copy_extension.sh'
+
+website:
+  title: "closeread"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: guide/index.qmd
+        text: Guide
+      - href: gallery/index.qmd
+        text: Gallery
+      - href: reference/index.qmd
+        text: Reference
+      - text: "Help"
+        menu:
+          - text: "Report a Bug"
+            icon: "bug"
+            href: "https://github.com/qmd-lab/closeread/issues"
+          - text: "Ask a Question"
+            icon: "chat-right-text"
+            href: "https://github.com/qmd-lab/closeread/discussions"
+    tools:
+      - text: "Closeread GitHub"
+        icon: github
+        href: https://github.com/qmd-lab/closeread
+  
+  sidebar:
+    - id: Guide
+      style: "docked"
+      background: light
+      contents:
+        - section: Guide
+          href: guide/index.qmd
+          contents: 
+          - guide/components.qmd
+          - guide/focus-effects.qmd
+          - guide/layouts.qmd
+          - guide/authoring-tools.qmd
+          
+  page-footer:
+    background: light
+    center: 
+      - icon: github
+        href: https://github.com/qmd-lab/closeread
+        
+
+format:
+  html:
+    theme: [cosmo]
