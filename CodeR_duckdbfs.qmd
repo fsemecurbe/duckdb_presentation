@@ -1,0 +1,54 @@
+---
+title: "Equivalent avec R et le package duckdbfs"
+format: html
+---
+
+
+
+```{r}
+#| warning: false
+library(duckdbfs)
+library(dplyr)
+library(sf)
+```
+
+IMPORTANT AVANT DE COMMENCER : PENSER A DESACTIVER LE VPN
+
+Créer une connexion au dataset Parquet
+
+```{r}
+res <- duckdbfs::open_dataset('https://www.data.gouv.fr/fr/datasets/r/b480cead-3f46-4b1b-a943-62a009b83f7a')
+```
+
+Pour obtenir le nombre de lignes dans notre table : 
+
+```{r}
+res %>% 
+  summarise(nombre = n()) %>% 
+  collect() 
+```
+
+Calcul de la population par dept
+
+```{r}
+res %>% 
+  mutate(dept = substr(lcog_geo,1,2)) %>% 
+  group_by(dept) %>% 
+  summarise(ind = sum(ind,na.rm = TRUE)) %>% 
+  collect() 
+```
+On va essayer de calculer la population à moins d'un kilomètre de la Tour Eiffel. On commence par créer le point de la Tour Eiffel puis le disque d'un kilomètre. 
+Attention le système de projection des carreaux est le 3035 LAEA europe. La commande pour le point :
+
+```{r}
+
+# Définir les coordonnées de la Tour Eiffel
+eiffel_point <- st_sfc(st_point(c(3756295, 2889313)), crs = 3035)
+
+# Créer le buffer de 1 km
+eiffel_buffer <- st_buffer(eiffel_point, dist = 1000)
+
+# Convertir le buffer en WKT pour l'utiliser dans une requête
+buffer_wkt <- st_as_text(eiffel_buffer)
+```
+
